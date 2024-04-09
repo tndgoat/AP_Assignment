@@ -62,7 +62,7 @@ require_once './database/db_connection.php';
                         <div class="accordion-body">
                             <p class="h6">1. Thêm sản phẩm vào giỏ hàng</p>
                             <p>
-                                Chọn mục Menu góc trái bên trên để hiển thị các danh mục Sau đó click vào mục sản phẩm hoặc click vào nút <button class="btn btn-warning""><i class="fa-sharp fa-solid fa-bag-shopping"></i></button> để thêm sản phẩm vào giỏ.
+                                Chọn mục Menu góc trái bên trên để hiển thị các danh mục Sau đó click vào mục sản phẩm hoặc click vào nút <button class="btn btn-warning""><i class="fa-sharp fa-solid fa-calendar"></i></button> để thêm sản phẩm vào giỏ.
                             </p>
                             <p class="h6">2. Thanh toán đơn hàng</p>
                             <p>

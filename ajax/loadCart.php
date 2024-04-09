@@ -87,7 +87,7 @@ if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
                         </div>
                     </div>
                 </div>';
-    $headerCart .= '<i class="fa-sharp fa-solid fa-bag-shopping me-1"></i>' . sizeof($_SESSION['cart']);
+    $headerCart .= '<i class="fa-sharp fa-solid fa-calendar me-1"></i>' . sizeof($_SESSION['cart']);
 } else {
     $cart .=    '<div class="container pt-5 pb-5">
                             <div class="row mb-2">
@@ -101,7 +101,7 @@ if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
                                 </div>
                             </div>
                         </div>';
-    $headerCart .= '<i class="fa-sharp fa-solid fa-bag-shopping me-1"></i> 0';
+    $headerCart .= '<i class="fa-sharp fa-solid fa-calendar me-1"></i> 0';
 }
 
 $result = array(
