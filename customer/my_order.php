@@ -37,7 +37,7 @@
     $ketQua = $conn->query($sqlFindUser);
     $user = $ketQua->fetch_array();
     $userId = $user['user_id'];
-    $sqlFindOrder = "SELECT order_id, name_receiver, status, address_receiver, payment, order.updated_at FROM `ltncdb`.`order`, user WHERE order.user_id = '$userId' AND order.user_id = user.user_id";
+    $sqlFindOrder = "SELECT order_id, purpose, using_duration, receive_place, status, order.updated_at FROM `ltncdb`.`order`, user WHERE order.user_id = '$userId' AND order.user_id = user.user_id";
     $orders = $conn->query($sqlFindOrder);
 
     if ($orders->num_rows>0) {
@@ -51,11 +51,11 @@
                 <thead class="table-primary">
                     <tr>
                         <th scope="col">STT</th>
-                        <th scope="col">Mã đơn</th>
-                        <th scope="col">Tài xế</th>
+                        <th scope="col">Xe</th>
+                        <th scope="col">Thông tin tài xế</th>
                         <th scope="col">Nơi giao</th>
                         <th scope="col">Trạng thái</th>
-                        <th scope="col">Ngày đặt</th>
+                        <th scope="col">Thời gian</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -67,11 +67,11 @@
                     <tr>
                         <td scope="col"><?=$i?></td>
                         <td scope="col"><?=$row['order_id']?></td>
-                        <td scope="col"><?=$row['name_receiver']?></td>
-                        <td scope="col"><?=$row['address_receiver']?></td>
+                        <td scope="col"><?=$email?></td>
+                        <td scope="col"><?=$row['receive_place']?></td>
                         <td scope="col"><span class="text-danger"><?=$row['status']?></span></td>
                         <td scope="col"><?=$row['updated_at']?></td>
-                        <td scope="col"><?php if ($row['status']=="Đang xử lý") {echo "<form><button name='cancel' value='",$row['order_id'],"'>Hủy đơn</button></form>";}?> </td>
+                        <td scope="col"><?php if ($row['status']=="Đang chờ xét duyệt") {echo "<form><button name='cancel' value='",$row['order_id'],"'>Hủy chuyến</button></form>";}?> </td>
                     </tr>
             <?php
                     $i++;
