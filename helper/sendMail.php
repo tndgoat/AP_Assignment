@@ -28,12 +28,12 @@ function sendMailOrder($mail, $receiver, $content) {
 
         // Content
         $mail->isHTML(true);                                  
-        $mail->Subject = 'XYZ_ADMIN xác nhận đơn hàng #'.$receiver['id'];
+        $mail->Subject = 'XYZ_ADMIN xác nhận lịch trình #'.$receiver['id'];
         $mail->Body = ' <html>
                             <body>
                                 <h3>Xin chào '.$receiver['name'].'</h3>
                                 <p>Cảm ơn quý khách đã đặt hàng tại <a href="#">XYZ_ADMIN</a>.</p>
-                                <p>Đơn hàng quý khách sẽ sớm được gửi đi sau khi nhân viên của chúng tôi hoàn tất các thủ tục.</p>
+                                <p>Lịch trình quý khách sẽ sớm được gửi đi sau khi nhân viên của chúng tôi hoàn tất các thủ tục.</p>
                                 <div>'.$content.'</div>
                                 <p>Mọi thắc mắc xin vui lòng liên hệ qua gmail: tungnd.goat@gmail.com</p>
                                 <p>Xin kính chúc sức khỏe và may mắn!</p>

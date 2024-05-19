@@ -23,14 +23,14 @@ require_once './database/db_connection.php';
     require './includes/navbar.php';
 ?>
 <?php
-    $sqlShowProducts = "SELECT product_id, name, quantity, images, price, price_sale FROM product";
+    $sqlShowProducts = "SELECT product_id, name, weight, size, fuel_type, images, status FROM product";
     if (isset($_GET['categoryId'])) {
         settype($_GET['categoryId'], 'int');
         $categoryId = $_GET['categoryId'];
         if ($categoryId == 0) {
-            $sqlShowProducts = "SELECT product_id, name, quantity, images, price, price_sale FROM product";
+            $sqlShowProducts = "SELECT product_id, name, weight, size, fuel_type, images, status FROM product";
         } else {
-            $sqlShowProducts = "SELECT product_id, name, quantity, images, price, price_sale FROM product WHERE category_id = '$categoryId'";
+            $sqlShowProducts = "SELECT product_id, name, weight, size, fuel_type, images, status FROM product WHERE category_id = '$categoryId'";
         }
     } else {
         $categoryId = 0;
@@ -96,44 +96,23 @@ require_once './database/db_connection.php';
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>    
                                         <?php  
-                                            if ($row["quantity"] > 0) {
+                                            if ($row["status"] > 0) {
                                         ?>
-                                            <span class="badge bg-success">Còn hàng</span>
+                                            <span class="badge bg-success">Đang rảnh</span>
                                         <?php
                                             } else {
                                         ?>
-                                            <span class="badge bg-danger">Hết hàng</span>
+                                            <span class="badge bg-danger">Đang vận chuyển</span>
                                         <?php
                                             }
                                         ?>
                                     </div>
                                     <div class="btn btn-outline-danger"><i class=" fa-light fa-heart"></i> </div>
                                 </div>
-                                <p>
-                                <?php
-                                    // Nếu có giá Khuyến mãi
-                                    if ($row["price_sale"] != 0 ) {
-                                ?>
-                                        <?php
-                                            echo '<del class="text-secondary">'.number_format($row["price"]).'</del><sup>đ</sup>'; 
-                                        ?> 
-                                    
-                                        <?php
-                                            echo '<strong><span class="text-danger ms-3">'.number_format($row["price_sale"]).'<sup>đ</sup></span></strong>'; 
-                                        ?> 
-                                <?php
-                                // nếu không có khuyến mãi, hiện giá gốc
-                                    } else {
-                                        echo '<strong>'.number_format($row["price"]).'<sup>đ</sup></strong>'; 
-                                    }
-                                ?>
-                                </p>
                             </div>
                         </div>
                         <div class="card-footer d-flex flex-column">
                             <a href="<?php echo $rootPath?>/product_detail.php?productId=<?php echo $row['product_id']?>" class="btn btn-primary">Xem chi tiết</a>
-                            <!-- <a href="<?php echo $rootPath?>/process_cart.php?action=add&id=<?php echo $row['product_id']?>&quantity=1" class="btn btn-warning mt-1 <?php if ($row["quantity"] == 0) echo 'disabled'?>"><i class="fa-light fa-cart-plus"></i></a> -->
-                            <button onclick="addCartItem(<?=$row['product_id']?>)" class="btn btn-warning mt-1 <?php if ($row["quantity"] == 0) echo 'disabled'?>"><i class="fa-light fa-cart-plus"></i></button>
                         </div>
                         </div>
                     </div>
@@ -222,7 +201,7 @@ require_once './database/db_connection.php';
                 productId: id,
             },
             success: function (data) {
-                alert("Thêm sản phẩm thành công");
+                alert("Đăng kí lịch trình thành công");
                 loadCartAjax();
             },
             error: function () {

@@ -44,17 +44,16 @@
 ?>
     <div class="container mt-5 mb-5">
         <div class="row">
-            <div class="h4 text-primary">Danh sách đơn hàng</div>
+            <div class="h4 text-primary">Danh sách lịch trình</div>
         </div>
         <div class="row">
             <table class="table">
                 <thead class="table-primary">
                     <tr>
                         <th scope="col">STT</th>
-                        <th scope="col">#Mã đơn</th>
-                        <th scope="col">Người nhận</th>
+                        <th scope="col">Mã đơn</th>
+                        <th scope="col">Tài xế</th>
                         <th scope="col">Nơi giao</th>
-                        <th scope="col">Tổng tiền</th>
                         <th scope="col">Trạng thái</th>
                         <th scope="col">Ngày đặt</th>
                         <th scope="col"></th>
@@ -70,7 +69,6 @@
                         <td scope="col"><?=$row['order_id']?></td>
                         <td scope="col"><?=$row['name_receiver']?></td>
                         <td scope="col"><?=$row['address_receiver']?></td>
-                        <td scope="col"><?=number_format($row['payment'])?> <sup>đ</sup></td>
                         <td scope="col"><span class="text-danger"><?=$row['status']?></span></td>
                         <td scope="col"><?=$row['updated_at']?></td>
                         <td scope="col"><?php if ($row['status']=="Đang xử lý") {echo "<form><button name='cancel' value='",$row['order_id'],"'>Hủy đơn</button></form>";}?> </td>
@@ -89,7 +87,7 @@
 <div class="container pt-5 pb-5">
     <div class="row mb-2">
         <div class="alert alert-warning">
-            <span class="h4"> <i class="fa-light fa-face-smile"></i> Bạn chưa có đơn hàng nào!!!</span>
+            <span class="h4"> <i class="fa-light fa-face-smile"></i> Bạn chưa có lịch trình nào!!!</span>
         </div>
     </div>
     <div class="row">

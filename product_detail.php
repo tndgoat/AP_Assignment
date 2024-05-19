@@ -123,60 +123,33 @@ if ($product->num_rows > 0) {
                 <div class="card">
                     <div class="card-body">
                         <h1 class="h2" style="color:#002A54"><?php echo $row["name"] ;?> <span class="text-secondary">#<?php echo $row["product_id"]; ?></span></h1>
-                        <p class="h3 py-2" id="price">
-                            <?php
-                                // Nếu có giá Khuyến mãi
-                                if ($row["price_sale"] != 0 ) {
-                                    echo '<del class="text-secondary">'.number_format($row["price"]).'</del><sup>đ</sup>'; 
-                                    echo '<strong><span class="text-danger ms-3">'.number_format($row["price_sale"]).'<sup>đ</sup></span></strong>'; 
-                            ?>
-                                <span class="ms-3 bg-danger text-danger bg-opacity-25 rounded">
-                                    <?php
-                                        echo '-'.(int)(100 - ($row['price_sale']/$row['price'])*100).'%';
-                                    ?>
-                                </span>
-                            <?php
-                                } else {
-                                    echo '<strong>'.number_format($row["price"]).'<sup>đ</sup></strong>'; 
-                                }
-                            ?>
-                        </p>
                         <p><span class="h6">Loại sản phẩm:</span> <?php echo $row["category_name"]; ?> </p>
+                        <p><span class="h6">Trọng tải:</span> <?php echo $row["weight"]; ?> </p>
+                        <p><span class="h6">Kích thước:</span> <?php echo $row["size"]; ?> </p>
+                        <p><span class="h6">Loại nhiên liệu:</span> <?php echo $row["fuel_type"]; ?> </p>
                         <h6>Mô tả chi tiết:</h6>
                         <p><?php echo $row["description"]?></p>
                         <?php  
-                            if ($row["quantity"] > 0) {
+                            if ($row["status"] > 0) {
                         ?>
                         <div class="pb-3">
-                            <span class="badge bg-success">Còn <?php echo $row['quantity']?> sản phẩm </span>
+                            <span class="badge bg-success">Hiện đang rảnh</span>
                         </div>
                         <?php
                             } else {
                         ?>
                         <div class="pb-3">
-                            <span class="badge bg-danger"href="#">Hết hàng tạm thời</span>
+                            <span class="badge bg-danger"href="#">Xe đang trong lịch trình</span>
                         </div>
                         <?php
                             }
                         ?>
                         <form action="process_cart.php" accept-charset="UTF-8" method="get">
-                            <div class="row">
-                                <div class="col-7">
-                                    <ul class="list-inline pb-3 equal-width">
-                                        <li class="list-inline-item text-right col-2.5">
-                                            <label class="form-label" for="cart_item_product_stock">Số lượng</label>
-                                        </li>
-                                        <li class="list-inline-item col-3">
-                                            <input type="number" class="form-control" name="quantity" id="quantityInput" value=1 min=1 max="<?=$row['quantity']?>">
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
                             <div class="row pb-3 d-flex justify-content-end">
                                 <div class="col-xl-4 col-md-6 col-sm-12">
                                     <input type="hidden" name="action" value="add"> 
                                     <input type="hidden" name="id" value="<?php echo $row['product_id']?>">
-                                    <button onclick="addCartItem(<?=$row['product_id']?>)" class="w-100 btn btn-warning btn-lg  <?php if ($row["quantity"] <= 0) echo 'disabled'?>"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</button>
+                                    <button onclick="addCartItem(<?=$row['product_id']?>)" class="w-100 btn btn-warning btn-lg  <?php if ($row["status"] <= 0) echo 'disabled'?>"><i class="fa-solid fa-cart-plus"></i> Đăng kí xe</button>
                                 </div>
                             </div>
                         </form>
@@ -324,7 +297,7 @@ if ($product->num_rows > 0) {
                 productId: id,
             },
             success: function (data) {
-                alert("Thêm sản phẩm thành công");
+                alert("Đăng ký xe thành công");
                 loadCartAjax();
             },
             error: function () {

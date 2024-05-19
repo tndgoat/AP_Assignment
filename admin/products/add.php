@@ -27,7 +27,7 @@ if (isset($_POST['add'])) {
         if (! file_exists("../../public/img/products/".$images))
             move_uploaded_file($_FILES["images"]["tmp_name"],"../../public/img/products/".$images);
         $conn->close();
-        setcookie('thongBao', 'Đã thêm sản phẩm thành công', time()+5);
+        setcookie('thongBao', 'Đã Đăng kí lịch trình thành công', time()+5);
         header("location: index.php");
         }
     }

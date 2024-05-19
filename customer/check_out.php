@@ -49,7 +49,7 @@
                             'email' => $_SESSION['email_user'],
                             'id' => $orderId,
                         ];
-            $order =  '<p>Đơn hàng gồm <span style="color: blue">'.sizeof($_SESSION['cart']).'</span> sản phẩm</p>
+            $order =  '<p>lịch trình gồm <span style="color: blue">'.sizeof($_SESSION['cart']).'</span> sản phẩm</p>
                     <table style="border: 1px solid #000;" cellspacing="0">
                         <thead>
                             <tr style="border: 1px solid #000; padding: 4px">
@@ -113,7 +113,7 @@ if (empty($_SESSION['cart']) && isset($success)) {
         <div class="row mb-2">
             <div class="alert alert-success text-center">
                 <div class="h4"> <i class="fa-sharp fa-solid fa-circle-check"></i> Thanh toán thành công</div>
-                <p>Chi tiết đơn hàng đã được gửi qua mail cho quý khách</p>
+                <p>Chi tiết lịch trình đã được gửi qua mail cho quý khách</p>
             </div>
         </div>
         <div class="row confirm">
@@ -130,7 +130,7 @@ if (empty($_SESSION['cart'])) {
     <div class="container pt-5 pb-5">
         <div class="row mb-2">
             <div class="alert alert-warning">
-                <span class="h4"> <i class="fa-light fa-face-smile"></i> Bạn chưa có đơn hàng nào!!!</span>
+                <span class="h4"> <i class="fa-light fa-face-smile"></i> Bạn chưa có lịch trình nào!!!</span>
             </div>
         </div>
         <div class="row confirm">
@@ -165,7 +165,7 @@ if (empty($_SESSION['cart'])) {
                 <div class="row shadow-sm p-3 mb-3 bg-body rounded">
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <h6>Đơn hàng gồm <?=sizeof($_SESSION['cart'])?> sản phẩm</h6>
+                            <h6>lịch trình gồm <?=sizeof($_SESSION['cart'])?> sản phẩm</h6>
                         </li>
                         <?php 
                             $totalBill = 0;

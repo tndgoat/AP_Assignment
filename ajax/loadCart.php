@@ -42,21 +42,21 @@ if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
                                                 </div>
                                             </div>
                                         </td>
-                                        <td> &emsp; &emsp; &emsp;' . number_format($value['price']) . ' <sup>đ</sup></td>
+                                        <td> &emsp; &emsp; &emsp;' . number_format($value['weight']) . ' <sup>đ</sup></td>
                                         <td class="align-middle">
                                             <div class="d-flex align-items-center">
                                                 <button class="btn btn-secondary btn-sm ms-1" onclick="subCartQty(' . $value['id'] . ')">-</button>
-                                                <button class="btn btn-light disabled">' . $value['quantity'] . '</button>
+                                                <button class="btn btn-light disabled">' . $value['size'] . '</button>
                                                 <button class="btn btn-secondary btn-sm me-1" onclick="addCartQty(' . $value['id'] . ')">+</button>
                                             </div>
                                         </td>
-                                        <td class="text-danger">&emsp; &emsp; &emsp; <strong>' . number_format($value['price'] * $value['quantity']) . ' <sup>đ</sup></strong></td>
+                                        <td class="text-danger">&emsp; &emsp; &emsp; <strong>' . number_format($value['weight'] * $value['size']) . ' <sup>đ</sup></strong></td>
                                         <td>
                                             &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
                                             <button class="btn btn-danger" onclick="deleteCartItem(' . $value['id'] . ')"><i class="fa-solid fa-trash-can"></i></button>
                                         </td>
                                     </tr>';
-        $totalBill += $value['price'] * $value['quantity'];
+        $totalBill += $value['weight'] * $value['size'];
     }
     $cart .=    '</tbody>
                             </table>

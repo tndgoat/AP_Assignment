@@ -22,17 +22,6 @@ require_once './database/db_connection.php';
     <?php
         require './includes/header.php';
         require './includes/navbar.php';
-        $bestSellerQueryString = "SELECT product.product_id, `order`.`order_id`, product.name, SUM(order_item.quantity_item) AS number_sold, product.images
-        FROM order_item, product, `order`
-        WHERE order_item.product_id = product.product_id 
-            AND order_item.order_id = `order`.`order_id` 
-            AND MONTH(`order`.`updated_at`) = MONTH(CURRENT_DATE())
-            AND YEAR(`order`.`updated_at`) = YEAR(CURRENT_DATE())
-        GROUP BY product.product_id
-        ORDER BY number_sold DESC
-        LIMIT 3";
-
-        $result = mysqli_query($conn, $bestSellerQueryString);
     ?>
 
     <div id="template-mo-zay-hero-carousel" class="carousel carousel-dark slide mb-5" data-bs-ride="carousel">
@@ -51,8 +40,8 @@ require_once './database/db_connection.php';
                         <div class="col-lg-6 mb-0 d-flex align-items-center content-wrapper" style="height: 300px;">
                             <div class="text-align-left align-self-center">
                                 <h1 class="h1" style="color:#002A54"><strong>Dịch vụ xe khách</strong></h1>
-                                <h3 class="h2" style="color:#ED171F">Đi đầu trong ...</h3>
-                                <p>mô tả</p>
+                                <h3 class="h2" style="color:#ED171F">Vận chuyển hành khách</h3>
+                                <p>Công ty XYZ hứa hẹn sẽ mang chất lượng vận chuyển tốt nhất cho khách hàng!</p>
                             </div>
                         </div>
                     </div>
@@ -67,8 +56,8 @@ require_once './database/db_connection.php';
                         <div class="col-lg-6 mb-0 d-flex align-items-center content-wrapper" style="height: 300px;">
                             <div class="text-align-left align-self-center">
                                 <h1 class="h1" style="color:#002A54"><strong>Dịch vụ xe tải</strong></h1>
-                                <h3 class="h2" style="color:#ED171F">Đi đầu trong ...</h3>
-                                <p>mô tả</p>
+                                <h3 class="h2" style="color:#ED171F">Vận chuyển hàng hóa trọng tải nhỏ</h3>
+                                <p>Công ty XYZ hứa hẹn sẽ mang chất lượng vận chuyển tốt nhất cho khách hàng!</p>
                             </div>
                         </div>
                     </div>
@@ -83,8 +72,8 @@ require_once './database/db_connection.php';
                         <div class="col-lg-6 mb-0 d-flex align-items-center content-wrapper" style="height: 300px;">
                             <div class="text-align-left align-self-center">
                                 <h1 class="h1" style="color:#002A54"><strong>Dịch vụ xe container</strong></h1>
-                                <h3 class="h2" style="color:#ED171F">Đi đầu trong ...</h3>
-                                <p>mô tả</p>
+                                <h3 class="h2" style="color:#ED171F">Vận chuyển hàng hóa trọng tải lớn</h3>
+                                <p>Công ty XYZ hứa hẹn sẽ mang chất lượng vận chuyển tốt nhất cho khách hàng!</p>
                             </div>
                         </div>
                     </div>
@@ -94,11 +83,11 @@ require_once './database/db_connection.php';
     </div>
 
     <?php
-    $sqlShowProducts = "SELECT product_id, name, quantity, images, price, price_sale FROM product";
+    $sqlShowProducts = "SELECT product_id, name, weight, size, fuel_type, images, status FROM product";
     $categoryId = '';
     if (isset($_POST['search_btn'])) {
         $categoryId = $_POST['categoryId'];
-        $sqlShowProducts = "SELECT product_id, name, quantity, images, price, price_sale FROM product WHERE category_id = '$categoryId'";
+        $sqlShowProducts = "SELECT product_id, name, weight, size, fuel_type, images, status FROM product WHERE category_id = '$categoryId'";
     }
     $products = $conn->query($sqlShowProducts);
     $totalProducts = $products->num_rows;
@@ -118,7 +107,6 @@ require_once './database/db_connection.php';
     }
 
     $start = ($currentPage - 1) * $limit;
-    // $sqlShowProducts = "SELECT product_id, name, quantity, images, price, price_sale FROM product LIMIT $start, $limit";
     $sqlShowProducts = $sqlShowProducts . " LIMIT $start, $limit";
     $products = $conn->query($sqlShowProducts);
     ?>

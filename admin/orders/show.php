@@ -22,7 +22,7 @@ if (isset($_GET['id'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đơn hàng</title>
+    <title>lịch trình</title>
     <link rel="stylesheet"  href="https://site-assets.fontawesome.com/releases/v6.1.2/css/all.css">
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -48,7 +48,7 @@ if (isset($_GET['id'])) {
                     $ketQua = $conn->query($sqlOrder);
                     $ketQua = $ketQua->fetch_array();
                 ?>  
-                <div class="text-secondary h5">Đơn hàng #<?=$ketQua['order_id']?></div>
+                <div class="text-secondary h5">lịch trình #<?=$ketQua['order_id']?></div>
                 <div>Người đặt hàng: <?=$ketQua['name']?></div>
                 <div>Người nhận: <?=$ketQua['name_receiver']?></div>
                 <div>Hình thức thanh toán: <?=$ketQua['payment_method']?></div>
@@ -56,7 +56,7 @@ if (isset($_GET['id'])) {
                 <div>Số điện thoại: <?=$ketQua['phone_receiver']?></div>
                 <div>Địa chỉ email: <?=$ketQua['email']?></div>
                 <div>Thời gian đặt hàng: <?=$ketQua['updated_at']?></div>
-                <div>Trạng thái đơn hàng: 
+                <div>Trạng thái lịch trình: 
                 <span class="
                     <?php 
                         if ($ketQua['status'] == 'Đang xử lý')
@@ -81,7 +81,7 @@ if (isset($_GET['id'])) {
                 ?>
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <h6>Đơn hàng gồm <?=$detail->num_rows?> sản phẩm</h6>
+                        <h6>lịch trình gồm <?=$detail->num_rows?> sản phẩm</h6>
                     </li>
                     <?php 
                         $totalBill = 0;

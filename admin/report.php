@@ -5,7 +5,7 @@ if (!isset($_SESSION["email_ad"])) {
     header('location: login.php');
 }
 require_once '../database/db_connection.php';
-// đơn hàng
+// lịch trình
 $sqlOrder = "SELECT count(*) as count FROM `ltncdb`.`order`";
 $dataCountOrder = $conn->query($sqlOrder);
 $dataCountOrder = $dataCountOrder->fetch_array();
