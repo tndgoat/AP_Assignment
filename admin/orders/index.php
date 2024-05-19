@@ -23,7 +23,7 @@ require_once '../../database/db_connection.php';
     require '../includes/header.php';
     require '../includes/navbar.php';
 
-    $sqlOrders = "SELECT order_id, user.name, status, address_receiver, payment FROM `ltncdb`.`order`, user WHERE order.user_id = user.user_id";
+    $sqlOrders = "SELECT * FROM `ltncdb`.`order`, user WHERE order.user_id = user.user_id";
     $orders = $conn->query($sqlOrders);
 
     if ($orders->num_rows > 0) {
@@ -44,7 +44,7 @@ require_once '../../database/db_connection.php';
                         <th scope="col">STT</th>
                         <th scope="col">Mã chuyến đi</th>
                         <th scope="col">Tài xế</th>
-                        <th scope="col">Nơi giao</th>
+                        <th scope="col">Nơi nhận xe</th>
                         <th scope="col">Trạng thái</th>
                         <th scope="col">Thao tác</th>
                     </tr>
@@ -58,8 +58,8 @@ require_once '../../database/db_connection.php';
                         <td scope="col"><?=$i?></td>
                         <td scope="col"><?=$row['order_id']?></td>
                         <td scope="col"><?=$row['name']?></td>
-                        <td scope="col"><?=$row['address_receiver']?></td>
-                        <td scope="col"><span class="text-danger"><?=$row['status']?></span></td>
+                        <td scope="col"><?=$row['receive_place']?></td>
+                        <td scope="col"><span><?=$row['status']?></span></td>
                         <th scope="col">
                             <a href="./show.php?id=<?=$row['order_id']?>" class="btn btn-secondary"><i class="fa-regular fa-eye"></i></a>
                             <a href="./update.php?id=<?=$row['order_id']?>" class="btn btn-warning"><i class="fa-solid fa-pencil"></i></a>

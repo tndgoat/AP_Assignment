@@ -36,12 +36,12 @@ if (isset($_GET['id'])) {
 ?>
     <div class="container mt-5 mb-5 shadow-sm p-3 mb-5 bg-body rounded">
         <div class="row">
-            <div class="h3 text-primary text-center">Chi tiết hóa đơn <a href="./index.php" class="btn btn-secondary">Back</a></div>
+            <div class="h3 text-primary text-center">thông tin chi tiết  <a href="./index.php" class="btn btn-secondary">Back</a></div>
         </div>
         <div class="row">
             <div class="col-xl-6 col-md-6 col-sm-12">
                 <?php
-                    $sqlOrder = "SELECT order_id, payment_method, address_receiver, phone_receiver, name_receiver, order.updated_at, status, name, email 
+                    $sqlOrder = "SELECT *
                     FROM `ltncdb`.`order`, user 
                     WHERE order.user_id = user.user_id
                     AND order_id = '$orderId'";
@@ -49,20 +49,18 @@ if (isset($_GET['id'])) {
                     $ketQua = $ketQua->fetch_array();
                 ?>  
                 <div class="text-secondary h5">lịch trình #<?=$ketQua['order_id']?></div>
-                <div>Người đặt hàng: <?=$ketQua['name']?></div>
-                <div>Người nhận: <?=$ketQua['name_receiver']?></div>
-                <div>Hình thức thanh toán: <?=$ketQua['payment_method']?></div>
-                <div>Địa chỉ nhận hàng: <?=$ketQua['address_receiver']?></div>
-                <div>Số điện thoại: <?=$ketQua['phone_receiver']?></div>
+                <div>Tên tài xế: <?=$ketQua['name']?></div>
+                <div>Nơi nhận: <?=$ketQua['receive_place']?></div>
+                <div>Số điện thoại tài xế: <?=$ketQua['phone']?></div>
                 <div>Địa chỉ email: <?=$ketQua['email']?></div>
-                <div>Thời gian đặt hàng: <?=$ketQua['updated_at']?></div>
-                <div>Trạng thái lịch trình: 
+                <div>Thời gian gửi yêu cầu: <?=$ketQua['updated_at']?></div>
+                <div>Thời hạn sử dụng xe: <?= $ketQua['using_duration'] ?> ngày</div>
+                <div>Mục đích sử dụng: <?= $ketQua['purpose'] ?> </div>
+                <div>Trạng thái phê duyệt: 
                 <span class="
                     <?php 
                         if ($ketQua['status'] == 'Đang xử lý')
                             echo 'text-danger';
-                        elseif ($ketQua['status'] == 'Đang giao')
-                            echo 'text-primary';
                         else 
                             echo 'text-success' 
                     ?>
@@ -70,48 +68,52 @@ if (isset($_GET['id'])) {
                     <?=$ketQua['status']?>
                 </span>     
                 </div>
+                <div>Trạng thái yêu cầu: 
+                <span class="
+                    <?php
+                                    if ($ketQua['expired_status'] == 0)
+                                        echo 'text-danger';
+                                    else
+                                        echo 'text-success'
+                                            ?>
+                                    ">
+                        <?php  if($ketQua['expired_status'] == 0){
+                        echo "Đã hết hạn";
+                        }
+                            else {
+                        echo "Còn hiệu lực";        
+                            } ?>
+                    </span>
+                </div>
             </div>
             <div class="col-xl-6 col-md-6 col-sm-12">
                 <?php
-                    $sqlDetail = "SELECT product.name, quantity_item, product.price, product.price_sale  
+                    $sqlDetail = "SELECT *
                     FROM order_item, product 
                     WHERE order_id = '$orderId' 
                     AND order_item.product_id = product.product_id";
                     $detail = $conn->query($sqlDetail);
+                    $cardetail = $detail->fetch_array();
                 ?>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <h6>lịch trình gồm <?=$detail->num_rows?> xe</h6>
-                    </li>
-                    <?php 
-                        $totalBill = 0;
-                    ?>
-                    <?php while($row = $detail->fetch_assoc()) { ?>
-                        <li class="list-group-item">
-                            <p class="d-flex justify-content-between">
-                                <span><?=$row['quantity_item']?>x <?=$row['name']?></span>
-                                <?php if (is_null($row['price_sale'])) { ?>
-                                    <span><?=number_format($row['price']*$row['quantity_item'])?> <sup>đ</sup> </span>
-                                    <?php 
-                                        $totalBill += $row['price']*$row['quantity_item'];
-                                    ?>
-                                <?php } else {?>
-                                    <span><?=number_format($row['price_sale']*$row['quantity_item'])?> <sup>đ</sup> </span>
-                                    <?php 
-                                        $totalBill += $row['price_sale']*$row['quantity_item'];
-                                    ?>
-                                <?php } ?>
-                                
-                            </p>
-                        </li>
-                    <?php } ?>
-                    <li class="list-group-item">
-                        <p class="d-flex justify-content-between">
-                            <span>Tổng hóa đơn (đã gồm VAT)</span>
-                            <span class="text-danger"><strong><?=number_format($totalBill)?> <sup>đ</sup></strong> </span>
-                        </p>
-                    </li>
-                </ul>
+
+                <div>Tên xe: <?= $cardetail['name'] ?></div>
+                <div>Loại xe: <?php if ($cardetail['category_id'] == 1) {
+                    echo "Xe khách";
+                } elseif ($cardetail['category_id'] == 2) {
+                    echo "Xe tải";
+                } else
+                    echo "Container";?></div>
+                <div>Loại nhiên liệu: <?= $cardetail['fuel_type'] ?></div>
+                <div>Trạng thái: <?php if ($cardetail['status'] == 0) {
+                    echo "Đang hoạt động";
+                } elseif ($cardetail['status'] == 1) {
+                    echo "Đang bảo dưỡng";
+                } 
+                else {
+                    echo "Ngưng hoạt động";
+                } ?></div>
+                <div>Hình ảnh </div>
+
             </div>
         </div>
     </div>

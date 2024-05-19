@@ -20,7 +20,10 @@ if (isset($_GET['id'])) {
 
 if (isset($_POST['update'])) {
     $status = mysqli_real_escape_string($conn,$_POST['status']);
+    $expire = mysqli_real_escape_string($conn, $_POST['expired']);
     $sqlUpdate = "UPDATE `ltncdb`.`order` SET status = '$status' WHERE order_id = '$orderId'";
+    $conn->query($sqlUpdate);
+    $sqlUpdate = "UPDATE `ltncdb`.`order` SET expired_status = '$expire' WHERE order_id = '$orderId'";
     $conn->query($sqlUpdate);
     setcookie('thongBao', 'Cập nhật thành công', time()+5);
     $conn->close();
@@ -50,13 +53,13 @@ if (isset($_POST['update'])) {
             <a href="./index.php" class="btn btn-secondary">Back</a>
         </div>
         <div class="row">
-            <div class="h3 text-primary text-center">Cập nhật hóa đơn</div>
+            <div class="h3 text-primary text-center">Cập nhật thông tin</div>
         </div>
         <br>
         <div class="row">
-            <div class="col-xl-6 col-md-6 col-sm-12">
+            <div class="col-xl-12 col-md-6 col-sm-12">
                 <?php
-                    $sqlOrder = "SELECT order_id, payment_method, address_receiver, phone_receiver, name_receiver, order.updated_at, status, name, email 
+                    $sqlOrder = "SELECT *
                     FROM `ltncdb`.`order`, user 
                     WHERE order.user_id = user.user_id
                     AND order_id = '$orderId'";
@@ -64,64 +67,27 @@ if (isset($_POST['update'])) {
                     $ketQua = $ketQua->fetch_array();
                 ?>  
                 <div class="text-secondary h5">lịch trình #<?=$ketQua['order_id']?></div>
-                <div>Người đặt hàng: <?=$ketQua['name']?></div>
-                <div>Người nhận: <?=$ketQua['name_receiver']?></div>
-                <div>Hình thức thanh toán: <?=$ketQua['payment_method']?></div>
-                <div>Địa chỉ nhận hàng: <?=$ketQua['address_receiver']?></div>
-                <div>Số điện thoại: <?=$ketQua['phone_receiver']?></div>
+                <div>Tên tài xế: <?=$ketQua['name']?></div>
+                <div>Nơi nhận: <?=$ketQua['receive_place']?></div>
+                <div>Số điện thoại tài xế: <?=$ketQua['phone']?></div>
                 <div>Địa chỉ email: <?=$ketQua['email']?></div>
-                <div>Thời gian đặt hàng: <?=$ketQua['updated_at']?></div>
+                <div>Thời gian gửi yêu cầu: <?=$ketQua['updated_at']?></div>
+                <div>Thời hạn sử dụng xe: <?= $ketQua['using_duration'] ?> ngày</div>
                 <div class="d-flex">
-                    <span class="me-3">Trạng thái lịch trình: </span>
                     <form action="<?=$_SERVER['PHP_SELF']?>?id=<?=$orderId?>" method="post">
+                        <label for="status" >Trạng thái phê duyệt: </label>
                         <select name="status" class="form-select form-select-sm">
                             <option value="Đang xử lý">Đang xử lý</option>
-                            <option value="Đang giao">Đang giao</option>
-                            <option value="Đã giao">Đã giao</option>
+                            <option value="Thành công">Thành công</option>
                         </select>
-                        <input type="submit" class="btn btn-success btn-lg mt-3" name="update" value="Cập nhật">
+                        <label for="expired" >Trạng thái yêu cầu: </label>
+                        <select name="expired" class="form-select form-select-sm">
+                            <option value="1">Còn hiệu lực</option>
+                            <option value="0">Đã hết hạn</option>
+                        </select>
+                        <button type="submit" class="btn btn-success btn-lg mt-3" name="update" > Cập nhât</button>
                     </form>
                 </div>
-            </div>
-            <div class="col-xl-6 col-md-6 col-sm-12">
-                <?php
-                    $sqlDetail = "SELECT product.name, quantity_item, product.price, product.price_sale   
-                    FROM order_item, product 
-                    WHERE order_id = '$orderId' 
-                    AND order_item.product_id = product.product_id";
-                    $detail = $conn->query($sqlDetail);
-                ?>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <h6>lịch trình gồm <?=$detail->num_rows?> xe</h6>
-                    </li>
-                    <?php $totalBill = 0; ?>
-                    <?php while($row = $detail->fetch_assoc()) { ?>
-                        <li class="list-group-item">
-                            <p class="d-flex justify-content-between">
-                                <span><?=$row['quantity_item']?>x <?=$row['name']?></span>
-                                <?php if (is_null($row['price_sale'])) { ?>
-                                    <span><?=number_format($row['price']*$row['quantity_item'])?> <sup>đ</sup> </span>
-                                    <?php
-                                        $totalBill += $row['price']*$row['quantity_item'];
-                                    ?>
-                                <?php } else { ?>
-                                    <span><?=number_format($row['price_sale']*$row['quantity_item'])?> <sup>đ</sup> </span>
-                                    <?php
-                                        $totalBill += $row['price_sale']*$row['quantity_item'];
-                                    ?>
-                                <?php } ?>
-                            </p>
-                        </li>
-                    <?php } ?>
-                    <li class="list-group-item">
-                        <p class="d-flex justify-content-between">
-                            <span>Tổng hóa đơn (đã gồm VAT)</span>
-                            <span class="text-danger"><strong><?=number_format($totalBill)?> <sup>đ</sup></strong> </span>
-                        </p>
-                    </li>
-                </ul>
-            </div>
         </div>
     </div>
 <?php
