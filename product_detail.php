@@ -144,7 +144,7 @@ if ($product->num_rows > 0) {
                         <?php
                             }
                         ?>
-                        <form action="process_cart.php" accept-charset="UTF-8" method="get">
+                        <form action="regis_car.php" accept-charset="UTF-8" method="get">
                             <div class="row pb-3 d-flex justify-content-end">
                                 <div class="col-xl-4 col-md-6 col-sm-12">
                                     <input type="hidden" name="action" value="add"> 
