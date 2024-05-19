@@ -133,7 +133,7 @@ if ($product->num_rows > 0) {
                             if ($row["status"] > 0) {
                         ?>
                         <div class="pb-3">
-                            <span class="badge bg-success">Hiện đang rảnh</span>
+                            <span class="badge bg-success">Xe hiện đang rảnh</span>
                         </div>
                         <?php
                             } else {
@@ -149,7 +149,7 @@ if ($product->num_rows > 0) {
                                 <div class="col-xl-4 col-md-6 col-sm-12">
                                     <input type="hidden" name="action" value="add"> 
                                     <input type="hidden" name="id" value="<?php echo $row['product_id']?>">
-                                    <button onclick="addCartItem(<?=$row['product_id']?>)" class="w-100 btn btn-warning btn-lg  <?php if ($row["status"] <= 0) echo 'disabled'?>">Đăng kí xe</button>
+                                    <button onclick="addCartItem(<?=$row['product_id']?>)" class="w-100 btn btn-warning btn-lg  <?php if ($row["status"] <= 0) echo 'disabled'?>">Đăng ký xe</button>
                                 </div>
                             </div>
                         </form>
