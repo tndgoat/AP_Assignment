@@ -24,7 +24,7 @@ require_once '../../database/db_connection.php';
 ?>
 
 <?php
-    $sqlShowProducts = "SELECT product_id, name, price, price_sale, quantity FROM product";
+    $sqlShowProducts = "SELECT product_id, name, weight, size, fuel_type FROM product";
     $products = $conn->query($sqlShowProducts);
 ?>
 <div class="container-fluid mt-5 mb-5">
@@ -43,7 +43,7 @@ require_once '../../database/db_connection.php';
 	</div>
     <div class="row">
         <div class="col-12">
-            <div class="container mb-5">  
+            <div class="container mb-5">
    
                 <div class="row">
                     <?php
@@ -72,11 +72,11 @@ require_once '../../database/db_connection.php';
 						<table class="table">
 							<thead class="table-primary">
 								<tr>
-									<th scope="col">STT</th>
+									<th scope="col">Mã xe</th>
 									<th scope="col">Tên xe</th>
-									<th scope="col">Giá t</th>
-									<th scope="col">Giá giảm</th>
-									<th scope="col">Số lượng</th>
+									<th scope="col">Trọng tải (Kg)</th>
+									<th scope="col">Kích thước (người)</th>
+									<th scope="col">Nhiên liệu</th>
 									<th scope="col">Cài đặt</th>
 								</tr>
 							</thead>
@@ -87,9 +87,9 @@ require_once '../../database/db_connection.php';
 								<tr>
 									<th scope="row"><?=$row['product_id']?></th>
 									<td><?=$row['name']?></td>
-									<td><?=$row['price']?></td>
-									<td><?=$row['price_sale']?></td>
-									<td><?=$row['quantity']?></td>
+									<td><?=$row['weight']?></td>
+									<td><?=$row['size']?></td>
+									<td><?=$row['fuel_type']?></td>
 									<td>
 										<a href="./update.php?id=<?=$row['product_id']?>" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></a>
 										<a href="./delete.php?id=<?=$row['product_id']?>" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>

@@ -9,25 +9,25 @@ if (!isset($_SESSION["email_ad"])) {
 require_once '../../database/db_connection.php';
 if (isset($_POST['add'])) {
     if ($_FILES['images']['error']>0) {
-        $tb = 'Lỗi: lỗi file hình - mã lỗi:'.$_FILES['images']['error'].'<br>';
+        $tb = 'Vui lòng nhập ảnh hợp lệ!';
     } else {
         $name = mysqli_real_escape_string($conn,$_POST['name']);
-        $quantity = mysqli_real_escape_string($conn,$_POST['quantity']);
-        $price = mysqli_real_escape_string($conn,$_POST['price']);
-        $priceSale = mysqli_real_escape_string($conn,$_POST['priceSale']);
+        $weight = mysqli_real_escape_string($conn,$_POST['weight']);
+        $size = mysqli_real_escape_string($conn,$_POST['size']);
+        $fuel_type = mysqli_real_escape_string($conn,$_POST['fuel_type']);
         $description = mysqli_real_escape_string($conn,$_POST['description']);
         $categoryId = mysqli_real_escape_string($conn,$_POST['categoryId']);
         $images = mysqli_real_escape_string($conn,$_FILES['images']['name']);
-        if ($name == '' || $quantity == '' || $description == '' || $price == '' || $priceSale == '' || $categoryId =='' || $images == '' ) {
+        if ($name == '' || $weight == '' || $size == '' || $fuel_type == '' || $description == '' || $categoryId =='' || $images == '' ) {
             $tb .= 'Bạn chưa nhập đủ các trường'.'<br/>';
         } else {
-        $sqlInsert = "INSERT INTO product (name, category_id, description, images, quantity, price, price_sale) 
-                    VALUES ('$name', '$categoryId', '$description', '$images', '$quantity', '$price', '$priceSale')"; 
+        $sqlInsert = "INSERT INTO product (name, category_id, description, images, weight, size, fuel_type) 
+                    VALUES ('$name', '$categoryId', '$description', '$images', '$weight', '$size', '$fuel_type')"; 
         $conn->query($sqlInsert);
         if (! file_exists("../../public/img/products/".$images))
             move_uploaded_file($_FILES["images"]["tmp_name"],"../../public/img/products/".$images);
         $conn->close();
-        setcookie('thongBao', 'Đã Đăng kí lịch trình thành công', time()+5);
+        setcookie('thongBao', 'Bạn đã thêm xe mới thành công', time()+5);
         header("location: index.php");
         }
     }
@@ -56,7 +56,7 @@ if (isset($_POST['add'])) {
 <div class="container">
     <div class="row">
         <div class="col text-center h4 text-primary">
-            Thêm mới sản phẩm
+            Thêm xe mới
         </div>
     </div>
     <?php 
@@ -69,24 +69,24 @@ if (isset($_POST['add'])) {
         <div class="col-xl-8 col-md-6 col-sm-12 shadow p-3 mb-5 bg-body rounded">
             <form action="<?=$_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
-                    <label for="name" class="form-label">Tên sản phẩm</label>
-                    <input type="text" class="form-control" name="name" value="" id="name" placeholder="Nhập tên sản phẩm">
+                    <label for="name" class="form-label">Tên xe</label>
+                    <input type="text" class="form-control" name="name" value="" id="name" placeholder="Nhập tên xe">
                 </div>
                 <div class="mb-3">
-                    <label for="quantity" class="form-label">Hàng tồn</label>
-                    <input type="number" class="form-control" name="quantity" value="" id="quantity" placeholder="Nhập số lượng hàng còn lại">
+                    <label for="weight" class="form-label">Trọng tải</label>
+                    <input type="number" class="form-control" name="weight" value="" id="weight" placeholder="Nhập trọng tải">
                 </div>
                 <div class="mb-3">
-                    <label for="price" class="form-label">Giá</label>
-                    <input type="number" class="form-control" name="price" value="" id="price" placeholder="Nhập giá bán của sản phẩm">
+                    <label for="size" class="form-label">Kích thước</label>
+                    <input type="number" class="form-control" name="size" value="" id="size" placeholder="Nhập kích thước">
                 </div>
                 <div class="mb-3">
-                    <label for="price_sale" class="form-label">Giá giảm</label>
-                    <input type="number" class="form-control" name="priceSale" value="" id="price_sale" placeholder="Giảm giá">
+                    <label for="fuel_type" class="form-label">Loại nhiên liệu</label>
+                    <input type="text" class="form-control" name="fuel_type" value="" id="fuel_type" placeholder="Nhập loại nhiên liệu">
                 </div>
                 <div class="mb-3">
                     <label for="desc" class="form-label">Mô tả</label>
-                    <textarea id="desc" name="description" class="form-control mt-2" id="" rows="6" placeholder="Nhập mô tả cho sản phẩm"></textarea>
+                    <textarea id="desc" name="description" class="form-control mt-2" id="" rows="6" placeholder="Nhập mô tả xe"></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="desc" class="form-label">Thể loại</label>
