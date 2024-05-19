@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: localhost:3307
--- Thời gian đã tạo: Th4 09, 2024 lúc 11:00 AM
--- Phiên bản máy phục vụ: 10.4.28-MariaDB
--- Phiên bản PHP: 8.2.4
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th5 19, 2024 lúc 06:50 AM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Phiên bản PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -170,11 +170,12 @@ CREATE TABLE `product` (
   `product_id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `category_id` int(11) NOT NULL,
+  `weight` int(11) DEFAULT NULL,
+  `size` int(11) DEFAULT NULL,
+  `fuel_type` varchar(100) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `images` varchar(100) NOT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `price` bigint(20) NOT NULL,
-  `price_sale` bigint(20) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -182,25 +183,25 @@ CREATE TABLE `product` (
 -- Đang đổ dữ liệu cho bảng `product`
 --
 
-INSERT INTO `product` (`product_id`, `name`, `category_id`, `description`, `images`, `quantity`, `price`, `price_sale`, `timestamp`) VALUES
-(1, 'Xe Khách 1', 1, 'hiện đang trống', 'bus1.jpg', 10, 39000, 19000, '2024-03-25 09:15:24'),
-(2, 'Xe Khách 2', 1, 'Trà chanh bí đao là sự kết hợp độc đáo giữa vị chát mà thanh của trà oolong cùng với vị chua chua của chanh và mùi thơm của vị bí đao mang đến cho bạn cảm giác mới lạ.', 'bus2.jpg', 10, 239000, 19000, '2024-03-25 09:15:30'),
-(3, 'Xe Khách 3', 1, 'Hồng Trà Vải thiều là sự kết hợp giữa hồng trà và vải thiều, nước trà có vị chát, vải thiều to tròn, căng mọng nước. Hồng trà không chỉ là một loại thức uống thơm ngon mà nó còn mang lại cho chúng ta nhiều công dụng rất tốt cho sức khỏe.\r\n<br>\r\nUống Hồng Trà Vải thiều giúp cải thiện sức khỏe tim mạch, hỗ trợ tiêu hóa và giúp giảm cân vì trong trà có chứa vitamin C làm kích thích quá trình trao đổi chất và đốt cháy lượng mỡ thừa nhanh hơn.\r\n\r\n\r\n', 'bus3.jpg', 10, 39000, 19000, '2024-03-25 09:15:42'),
-(4, 'Xe Khách 4', 1, 'Trà xanh hoa nhài với hương vị tự nhiên, thuần khiết.\r\n<ul>\r\n<li>Hỗ trợ giảm cân hiệu quả, Cải thiện làn da tươi trẻ mỗi ngày</li>\r\n<li>Chống oxy hóa cơ thể hằng ngày</li>\r\n<li>Điều hòa đường máu và Cân bằng đường huyết và huyết áp</li>\r\n<li>Giúp ngủ ngon sâu giấc hơn, cải thiện tình trạng mất ngủ</li>\r\n<li>Giúp giảm stress, lo âu…</li>\r\n<li>Dự phòng nguy cơ bị cảm lạnh, cúm</li>\r\n<ul>', 'bus4.jpg', 10, 39000, 19000, '2024-03-25 09:15:47'),
-(5, 'Xe Khách 5', 1, 'là sự kết hợp giữa hợp hương vị chát nhẹ cùng với cảm giác tươi mát, sảng khoái của bí đao. Trà xanh bí đao mang lại một trải nghiệm vô cùng tươi mới.', 'bus5.png', 10, 39000, 19000, '2024-03-25 09:17:39'),
-(6, 'Xe Khách 6', 1, 'Là sự hòa quyện của hồng trà và bí đao, thức uống hồng trà bí đao mang hương vị thơm nhẹ, ít chát hòa quyện với sự thanh mát của của bí đao.', 'bus6.jpg', 10, 39000, 19000, '2024-03-25 09:16:06'),
-(7, 'Xe Tải 1', 2, 'Trà sương sáo là loại trà đặc biệt được chế biến từ lá trà tươi và sương sáo tự nhiên mang đến hương vị thơm ngon thanh mát và tinh tế.', 'truck1.jpg', 10, 39000, 19000, '2024-03-25 09:16:13'),
-(8, 'Xe Tải 2', 2, 'Trà bí đao sương sáo là một loại nước giải khát thanh nhiệt. Được nhiều yêu thích bởi hương vị thơm ngon. Đây là một loại thức uống giải nhiệt tuyệt vời, thơm ngon tốt cho sức khỏe.\r\n', 'truck2.jpg', 10, 39000, 19000, '2024-03-25 09:16:19'),
-(9, 'Xe Tải 3', 2, 'Món Sương Sáo Latte không làm bạn mê nhưng đem lại cảm giác dễ chịu.<br>\r\nNguyên liệu đến từ thảo mộc thiên nhiên tạo nên một thức uống giải khát hiệu quả, kết hợp vị thơm béo của sữa tươi rất healthy và balance. Để thưởng thức trọn vẹn bạn nhớ khuấy đều cho hòa quyện vào nhau nhé! ', 'truck3.jpg', 20, 39000, 16000, '2024-03-25 09:16:23'),
-(10, 'Xe Tải 4', 2, 'Trân châu đường đen latte - một sự kết hợp hài hòa giữa cà phê, sữa và đường đen.\r\n<br>\r\nKhi ngửi sẽ thấy ngay mùi thơm thoang thoảng của cà phê. Nhấp môi một chút thì sẽ nếm được vị ngọt thơm đúng chuẩn hương vị đường đen, xen vào đó là độ béo của sữa càng làm tăng thêm sự quyến rũ của loại latte này.', 'truck4.jpg', 10, 39000, 19000, '2024-03-25 09:16:28'),
-(11, 'Xe Tải 5', 2, 'Trà xanh Latte là món uống kết hợp giữa trà xanh và sữa tươi. Không lạnh băng như trà xanh đá xay, cũng không quá ngậy béo như trà xanh phủ kem tươi, Trà xanh Latte có vị ngon rất riêng. Không quá ngọt, không ngậy béo mà đậm hương thơm của trà, hấp dẫn với vị của sữa, đây chính là món uống hoàn hảo cho các tín đồ của trà xanh.', 'truck5.jpg', 10, 39000, 19000, '2024-03-25 09:16:34'),
-(12, 'Xe Tải 6', 2, 'Sự kết hợp hài hòa giữa hồng trà, cafe latte và hương vị vải tự nhiên.', 'truck6.jpg', 10, 39000, 19000, '2024-03-25 09:16:39'),
-(13, 'Xe Container 1', 3, 'Sự hòa quyện giữa latte và hương vị thanh mát của bí đao.', 'container1.jpg', 10, 239000, 19000, '2024-03-25 09:16:50'),
-(14, 'Xe Container 2', 3, 'Latte truyền thống vốn được làm từ cà phê, sữa tươi và bọt sữa nay kết hợp với Hồng trà mang hương thơm thanh mát, ngọt nhẹ sẽ làm ngây ngất những ai yêu trà và thức uống latte.', 'container2.jpg', 10, 239000, 19000, '2024-03-25 09:16:54'),
-(15, 'Xe Container 3', 3, 'Trà xanh kết hợp với chanh không chỉ tạo thành thức uống giải khát có vị thanh mát, chua dịu mà còn mang lại nhiều lợi ích cho sức khỏe của bạn.', 'container3.jpg', 10, 239000, 19000, '2024-03-25 09:16:59'),
-(16, 'Xe Container 4', 3, 'Hồng trà chanh với hương vị ngọt nhẹ của vải thiều.', 'container4.jpg', 10, 239000, 19000, '2024-03-25 09:17:03'),
-(17, 'Xe Container 5', 3, 'hiện đang trống', 'container5.jpg', 1, 0, NULL, '2024-03-25 09:17:09'),
-(18, 'Xe Container 6', 3, 'hiện đang trống', 'container6.jpg', 1, 0, NULL, '2024-03-25 09:17:14');
+INSERT INTO `product` (`product_id`, `name`, `category_id`, `weight`, `size`, `fuel_type`, `description`, `images`, `status`, `timestamp`) VALUES
+(1, 'Xe Khách 1', 1, 12000, 12, 'Diesel', 'Xe khách 12 chỗ, động cơ Diesel', 'bus1.jpg', 1, '2024-05-19 04:49:12'),
+(2, 'Xe Khách 2', 1, 15000, 15, 'Gasoline', 'Xe khách 15 chỗ, động cơ xăng', 'bus2.jpg', 1, '2024-05-19 04:49:12'),
+(3, 'Xe Khách 3', 1, 18000, 18, 'Electric', 'Xe khách 18 chỗ, động cơ điện', 'bus3.jpg', 1, '2024-05-19 04:49:12'),
+(4, 'Xe Khách 4', 1, 13000, 13, 'Diesel', 'Xe khách 13 chỗ, động cơ Diesel', 'bus4.jpg', 0, '2024-05-19 04:49:12'),
+(5, 'Xe Khách 5', 1, 17000, 17, 'Hybrid', 'Xe khách 17 chỗ, động cơ hybrid', 'bus5.png', 2, '2024-05-19 04:49:12'),
+(6, 'Xe Khách 6', 1, 16000, 16, 'CNG', 'Xe khách 16 chỗ, động cơ khí tự nhiên CNG', 'bus6.jpg', 1, '2024-05-19 04:49:12'),
+(7, 'Xe Tải 1', 2, 20000, 10, 'Diesel', 'Xe tải trọng 20 tấn, chiều dài 10 mét, động cơ Diesel', 'truck1.jpg', 0, '2024-05-19 04:49:12'),
+(8, 'Xe Tải 2', 2, 25000, 12, 'Gasoline', 'Xe tải trọng 25 tấn, chiều dài 12 mét, động cơ xăng', 'truck2.jpg', 1, '2024-05-19 04:49:12'),
+(9, 'Xe Tải 3', 2, 30000, 15, 'Electric', 'Xe tải trọng 30 tấn, chiều dài 15 mét, động cơ điện', 'truck3.jpg', 0, '2024-05-19 04:49:12'),
+(10, 'Xe Tải 4', 2, 22000, 11, 'Diesel', 'Xe tải trọng 22 tấn, chiều dài 11 mét, động cơ Diesel', 'truck4.jpg', 1, '2024-05-19 04:49:12'),
+(11, 'Xe Tải 5', 2, 27000, 14, 'Hybrid', 'Xe tải trọng 27 tấn, chiều dài 14 mét, động cơ hybrid', 'truck5.jpg', 1, '2024-05-19 04:49:13'),
+(12, 'Xe Tải 6', 2, 26000, 13, 'CNG', 'Xe tải trọng 26 tấn, chiều dài 13 mét, động cơ khí tự nhiên CNG', 'truck6.jpg', 2, '2024-05-19 04:49:13'),
+(13, 'Xe Container 1', 3, 40000, 20, 'Diesel', 'Xe container trọng 40 tấn, chiều dài 20 mét, động cơ Diesel', 'container1.jpg', 2, '2024-05-19 04:49:13'),
+(14, 'Xe Container 2', 3, 45000, 22, 'Gasoline', 'Xe container trọng 45 tấn, chiều dài 22 mét, động cơ xăng', 'container2.jpg', 0, '2024-05-19 04:49:13'),
+(15, 'Xe Container 3', 3, 50000, 25, 'Electric', 'Xe container trọng 50 tấn, chiều dài 25 mét, động cơ điện', 'container3.jpg', 0, '2024-05-19 04:49:13'),
+(16, 'Xe Container 4', 3, 42000, 21, 'Diesel', 'Xe container trọng 42 tấn, chiều dài 21 mét, động cơ Diesel', 'container4.jpg', 1, '2024-05-19 04:49:13'),
+(17, 'Xe Container 5', 3, 47000, 24, 'Hybrid', 'Xe container trọng 47 tấn, chiều dài 24 mét, động cơ hybrid', 'container5.jpg', 1, '2024-05-19 04:49:13'),
+(18, 'Xe Container 6', 3, 46000, 23, 'CNG', 'Xe container trọng 46 tấn, chiều dài 23 mét, động cơ khí tự nhiên CNG', 'container6.jpg', 1, '2024-05-19 04:49:13');
 
 -- --------------------------------------------------------
 
