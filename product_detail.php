@@ -123,7 +123,7 @@ if ($product->num_rows > 0) {
                 <div class="card">
                     <div class="card-body">
                         <h1 class="h2" style="color:#002A54"><?php echo $row["name"] ;?> <span class="text-secondary">#<?php echo $row["product_id"]; ?></span></h1>
-                        <p><span class="h6">Loại sản phẩm:</span> <?php echo $row["category_name"]; ?> </p>
+                        <p><span class="h6">Loại xe:</span> <?php echo $row["category_name"]; ?> </p>
                         <p><span class="h6">Trọng tải:</span> <?php echo $row["weight"]; ?> </p>
                         <p><span class="h6">Kích thước:</span> <?php echo $row["size"]; ?> </p>
                         <p><span class="h6">Loại nhiên liệu:</span> <?php echo $row["fuel_type"]; ?> </p>
@@ -149,7 +149,7 @@ if ($product->num_rows > 0) {
                                 <div class="col-xl-4 col-md-6 col-sm-12">
                                     <input type="hidden" name="action" value="add"> 
                                     <input type="hidden" name="id" value="<?php echo $row['product_id']?>">
-                                    <button onclick="addCartItem(<?=$row['product_id']?>)" class="w-100 btn btn-warning btn-lg  <?php if ($row["status"] <= 0) echo 'disabled'?>"><i class="fa-solid fa-cart-plus"></i> Đăng kí xe</button>
+                                    <button onclick="addCartItem(<?=$row['product_id']?>)" class="w-100 btn btn-warning btn-lg  <?php if ($row["status"] <= 0) echo 'disabled'?>">Đăng kí xe</button>
                                 </div>
                             </div>
                         </form>
@@ -184,7 +184,7 @@ if ($product->num_rows > 0) {
         <div class="container card mt-5 mb-5">
             <div class="row">
                 <div class="ps-3 pe-3 pt-2">
-                    <h3 class="border-bottom border-secondary pb-3">Đánh giá sản phẩm</h3>
+                    <h3 class="border-bottom border-secondary pb-3">Đánh giá xe</h3>
                 </div>
             </div>
             <div class="row">
@@ -200,11 +200,11 @@ if ($product->num_rows > 0) {
                             $sqlUserOrder = "SELECT user_id FROM `ltncdb`.`order`, order_item WHERE user_id = '$userIdSelf' AND product_id = '$productId' AND order.order_id = order_item.order_id";
                             $checkBuy = $conn->query($sqlUserOrder);
                             if ($checkBuy->num_rows>0) {
-                                echo '<span class="text-success"><i class="fa-duotone fa-badge-check"></i> Đã mua sản phẩm này</span>';
+                                echo '<span class="text-success"><i class="fa-duotone fa-badge-check"></i> Đã sử dụng xe này</span>';
                             } else {
-                                echo '<span class="text-warning"><i class="fa-duotone fa-badge-check"></i> Chưa mua sản phẩm này</span>';
+                                echo '<span class="text-warning"><i class="fa-duotone fa-badge-check"></i> Chưa sử dụng xe này</span>';
                             }
-                        ?> 
+                        ?>
                         <p class="mt-3 ms-2">
                             <span class="text-success"><?=$row['title']?></span>:
                             <?=$row['content']?>
@@ -219,7 +219,7 @@ if ($product->num_rows > 0) {
                     <button type="button" class="btn btn-primary <?php if(!isset($_SESSION['email_user'])) echo 'disabled' ?>" data-bs-toggle="modal" data-bs-target="#postReview"><i class="fa-sharp fa-solid fa-circle-star"></i> Viết đánh giá</button>
                     <!-- <button class="ms-1 btn btn-outline-primary">Xem đánh giá <i class="fa-light fa-circle-play"></i></button> -->
                     <div class="mt-1">
-                        <i><small>(<i class="fa-regular fa-asterisk"></i>) Vui lòng đăng nhập để đánh giá sản phẩm này</small></i>
+                        <i><small>(<i class="fa-regular fa-asterisk"></i>) Vui lòng đăng nhập để đánh giá xe này</small></i>
                     </div>
                 </div>
             </div>
@@ -231,7 +231,7 @@ if ($product->num_rows > 0) {
     <div class="container card mt-5 mb-5">
         <div class="row">
             <div class="ps-3 pe-3 pt-2">
-                <h3 class="border-bottom border-secondary pb-3">Hãy là người đầu tiên đánh giá sản phẩm này</h3>
+                <h3 class="border-bottom border-secondary pb-3">Hãy là người đầu tiên đánh giá xe này</h3>
             </div>
         </div>
         <div class="row">
@@ -242,7 +242,7 @@ if ($product->num_rows > 0) {
         </div>
         <div class="row">
             <div class="ps-3 pe-3 pb-3">
-                <i><small>(<i class="fa-regular fa-asterisk"></i>) Vui lòng đăng nhập để đánh giá sản phẩm này</small></i>
+                <i><small>(<i class="fa-regular fa-asterisk"></i>) Vui lòng đăng nhập để đánh giá xe này</small></i>
             </div>
         </div>
     </div>
@@ -256,7 +256,7 @@ if ($product->num_rows > 0) {
         <input type="hidden" name="productId" value="<?=$productId?>">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Đánh giá sản phẩm</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Đánh giá xe</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

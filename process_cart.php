@@ -14,12 +14,12 @@
                 if ($id==0 || $quantity==0) 
                     header('location: product.php');
                 if (isset($_SESSION['cart'][$id])) {
-                    // nếu sản phẩm đã có trong giỏ thì tăng số lượng sản phẩm
+                    // nếu xe đã có trong giỏ thì tăng số lượng xe
                     $_SESSION['cart'][$id]['quantity'] += $quantity;
                     $conn->close();
                     header('location: product.php');
                 } else {
-                    // nếu sản phẩm chưa có trong giỏ thì set số lượng là 1
+                    // nếu xe chưa có trong giỏ thì set số lượng là 1
                     $sql = "SELECT name, images, price, price_sale FROM product WHERE product_id='$id'";
                     $product = $conn->query($sql);
                     if ($product->num_rows > 0) {
@@ -36,7 +36,7 @@
                         header('location: product.php');
                     }
                     else {
-                        echo '<div class="alert alert-danger mt-2 mb-2">'.'Sản phẩm này không tồn tại'.'</div>';
+                        echo '<div class="alert alert-danger mt-2 mb-2">'.'xe này không tồn tại'.'</div>';
                         echo "<a href='$rootPath/product.php'>".'Trở về trang chủ'.'</a>'; 
                     }
                 }

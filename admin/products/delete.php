@@ -10,7 +10,7 @@
         $productId = $_GET['id'];
         $sqlFindImg = "SELECT images FROM product WHERE product_id = '$productId'";
         $ketQua = $conn->query($sqlFindImg);
-        // Kiểm tra id sản phẩm có trong database không
+        // Kiểm tra id xe có trong database không
         if ($ketQua->num_rows>0) {
             $ketQua = $ketQua->fetch_array();
             $images = $ketQua['images'];
@@ -18,7 +18,7 @@
             $conn->query($sqlDelete);
             unlink("../../public/img/products/".$images);
             $conn->close();
-            setcookie('thongBao', 'Đã xóa sản phẩm thành công', time()+5);
+            setcookie('thongBao', 'Đã xóa xe thành công', time()+5);
             header("location: index.php");
         } else {
             $conn->close();

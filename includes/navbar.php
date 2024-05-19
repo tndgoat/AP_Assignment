@@ -50,7 +50,6 @@
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="<?php echo $rootPath ?>/customer/my_account.php">Tài khoản</a></li>
                 <li><a class="dropdown-item" href="<?php echo $rootPath ?>/customer/my_order.php">Lịch trình</a></li>
-                <li><a class="dropdown-item" href="<?php echo $rootPath ?>/customer/check_out.php">Thanh toán</a></li>
                 <li><a class="dropdown-item" href="<?php echo $rootPath ?>/customer/changePassword.php">Đổi mật khẩu</a></li>
               </ul>
             </div>

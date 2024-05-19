@@ -81,7 +81,7 @@ if (isset($_GET['id'])) {
                 ?>
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <h6>lịch trình gồm <?=$detail->num_rows?> sản phẩm</h6>
+                        <h6>lịch trình gồm <?=$detail->num_rows?> xe</h6>
                     </li>
                     <?php 
                         $totalBill = 0;

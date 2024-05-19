@@ -54,7 +54,7 @@
                         <th scope="col">
                             <span class="d-none d-xl-block d-xxl-none">STT</span>
                         </th>
-                        <th scope="col">Sản phẩm</th>
+                        <th scope="col">xe</th>
                         <th scope="col">Tiêu đề</th>
                         <th scope="col">Nội dung</th>
                         <th scope="col">
@@ -97,12 +97,12 @@
 <div class="container pt-5 pb-5">
     <div class="row mb-2">
         <div class="alert alert-warning">
-            <span class="h4"> <i class="fa-light fa-face-smile"></i> Bạn chưa có đánh giá sản phẩm nào!!!</span>
+            <span class="h4"> <i class="fa-light fa-face-smile"></i> Bạn chưa có đánh giá xe nào!!!</span>
         </div>
     </div>
     <div class="row">
         <div class="mx-auto w-25">
-            <a href="<?php echo $rootPath?>/product.php" class="btn btn-primary">Trở về trang sản phẩm</a>
+            <a href="<?php echo $rootPath?>/product.php" class="btn btn-primary">Trở về trang xe</a>
         </div>
     </div>
 </div>

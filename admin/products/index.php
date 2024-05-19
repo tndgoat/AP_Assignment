@@ -103,7 +103,7 @@ require_once '../../database/db_connection.php';
                     </div>
                     <?php         
                     } else {
-                        echo '<div class="alert alert-warning" role="alert"><i class="fa-light fa-circle-exclamation"></i> Không tìm thấy sản phẩm nào</div>';
+                        echo '<div class="alert alert-warning" role="alert"><i class="fa-light fa-circle-exclamation"></i> Không tìm thấy xe nào</div>';
                     }
             
                     $conn->close();

@@ -10,10 +10,10 @@ if (isset($_POST['productId'])) {
         header('location: ../404.php');
 
     if (isset($_SESSION['cart'][$id])) {
-        // nếu sản phẩm đã có trong giỏ thì tăng số lượng sản phẩm
+        // nếu xe đã có trong giỏ thì tăng số lượng xe
         $_SESSION['cart'][$id]['quantity']++;
     } else {
-        // nếu sản phẩm chưa có trong giỏ thì set số lượng là 1
+        // nếu xe chưa có trong giỏ thì set số lượng là 1
         $id = mysqli_real_escape_string($conn, $id);
         $sql = "SELECT name, images, price, price_sale FROM product WHERE product_id='$id'";
         $product = $conn->query($sql);

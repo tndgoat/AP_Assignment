@@ -93,7 +93,7 @@ if (isset($_POST['update'])) {
                 ?>
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <h6>lịch trình gồm <?=$detail->num_rows?> sản phẩm</h6>
+                        <h6>lịch trình gồm <?=$detail->num_rows?> xe</h6>
                     </li>
                     <?php $totalBill = 0; ?>
                     <?php while($row = $detail->fetch_assoc()) { ?>

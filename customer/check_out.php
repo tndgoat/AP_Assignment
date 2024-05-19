@@ -18,7 +18,7 @@
     $ketQua = $conn->query($sqlUser);
     $user = $ketQua->fetch_array();
     $id = $user['user_id'];
-    // Nếu không có sản phẩm trong giỏ hàng thì trở về trang giỏ hàng
+    // Nếu không có xe trong giỏ hàng thì trở về trang giỏ hàng
     if (isset($_POST['order'])) {
         $nameReceiver = $_POST['nameReceiver'];
         $phoneReceiver = $_POST['phoneReceiver'];
@@ -49,12 +49,12 @@
                             'email' => $_SESSION['email_user'],
                             'id' => $orderId,
                         ];
-            $order =  '<p>lịch trình gồm <span style="color: blue">'.sizeof($_SESSION['cart']).'</span> sản phẩm</p>
+            $order =  '<p>lịch trình gồm <span style="color: blue">'.sizeof($_SESSION['cart']).'</span> xe</p>
                     <table style="border: 1px solid #000;" cellspacing="0">
                         <thead>
                             <tr style="border: 1px solid #000; padding: 4px">
                                 <th style="border: 1px solid #000; padding: 4px">STT</th>
-                                <th style="border: 1px solid #000; padding: 4px">Tên sản phẩm</th>
+                                <th style="border: 1px solid #000; padding: 4px">Tên xe</th>
                                 <th style="border: 1px solid #000; padding: 4px">Số lượng</th>
                                 <th style="border: 1px solid #000; padding: 4px">Đơn giá</th>
                                 <th style="border: 1px solid #000; padding: 4px">Thành tiền</th>
@@ -75,7 +75,7 @@
             $order .= '</tbody>
                     </table>
         
-                    <p>Tổng giá trị sản phẩm: '.number_format($payment).' VND</p>
+                    <p>Tổng giá trị xe: '.number_format($payment).' VND</p>
                     <p>Phương thức thanh toán: '.$paymentMethod.'</p>
                     <p>Ngày đặt hàng: 08/12/2023</p>
                     <p>Địa chỉ giao hàng: '.$nameReceiver.', '.$phoneReceiver.', '.$addressReceiver.'</p>';
@@ -106,7 +106,7 @@
 ?>
 
 <?php 
-// Nếu chưa có sản phẩm trong giỏ hàng thì hiển thị btn quay về trang sản phẩm
+// Nếu chưa có xe trong giỏ hàng thì hiển thị btn quay về trang xe
 if (empty($_SESSION['cart']) && isset($success)) {
 ?>
     <div class="container pt-5 pb-5">
@@ -135,7 +135,7 @@ if (empty($_SESSION['cart'])) {
         </div>
         <div class="row confirm">
             <div class="mx-auto">
-                <a href="<?php echo $rootPath?>/product.php" class="btn btn-primary">Trở về trang sản phẩm</a>
+                <a href="<?php echo $rootPath?>/product.php" class="btn btn-primary">Trở về trang xe</a>
             </div>
         </div>
     </div>
@@ -165,7 +165,7 @@ if (empty($_SESSION['cart'])) {
                 <div class="row shadow-sm p-3 mb-3 bg-body rounded">
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <h6>lịch trình gồm <?=sizeof($_SESSION['cart'])?> sản phẩm</h6>
+                            <h6>lịch trình gồm <?=sizeof($_SESSION['cart'])?> xe</h6>
                         </li>
                         <?php 
                             $totalBill = 0;

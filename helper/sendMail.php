@@ -32,8 +32,8 @@ function sendMailOrder($mail, $receiver, $content) {
         $mail->Body = ' <html>
                             <body>
                                 <h3>Xin chào '.$receiver['name'].'</h3>
-                                <p>Cảm ơn quý khách đã đặt hàng tại <a href="#">XYZ_ADMIN</a>.</p>
-                                <p>Lịch trình quý khách sẽ sớm được gửi đi sau khi nhân viên của chúng tôi hoàn tất các thủ tục.</p>
+                                <p>Cảm ơn tài xế đã đăng ký lịch trình tại <a href="#"> nhà xe XYZ</a>.</p>
+                                <p>Lịch trình của tài xế sẽ sớm được sắp xếp và phản hồi sau khi nhân viên của nhà xe lên lịch.</p>
                                 <div>'.$content.'</div>
                                 <p>Mọi thắc mắc xin vui lòng liên hệ qua gmail: tungnd.goat@gmail.com</p>
                                 <p>Xin kính chúc sức khỏe và may mắn!</p>
