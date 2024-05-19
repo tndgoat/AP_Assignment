@@ -46,10 +46,9 @@ require_once '../../database/db_connection.php';
                 <thead class="table-primary">
                     <tr>
                         <th scope="col">STT</th>
-                        <th scope="col">#Mã đơn</th>
-                        <th scope="col">Người dùng</th>
+                        <th scope="col">Mã chuyến đi</th>
+                        <th scope="col">Tài xế</th>
                         <th scope="col">Nơi giao</th>
-                        <th scope="col">Tổng tiền</th>
                         <th scope="col">Trạng thái</th>
                         <th scope="col">Thao tác</th>
                     </tr>
@@ -64,7 +63,6 @@ require_once '../../database/db_connection.php';
                         <td scope="col"><?=$row['order_id']?></td>
                         <td scope="col"><?=$row['name']?></td>
                         <td scope="col"><?=$row['address_receiver']?></td>
-                        <td scope="col"><?=number_format($row['payment'])?> <sup>đ</sup></td>
                         <td scope="col"><span class="text-danger"><?=$row['status']?></span></td>
                         <th scope="col">
                             <a href="./show.php?id=<?=$row['order_id']?>" class="btn btn-secondary"><i class="fa-regular fa-eye"></i></a>
@@ -86,7 +84,7 @@ require_once '../../database/db_connection.php';
 <div class="container pt-5 pb-5">
     <div class="row mb-2">
         <div class="alert alert-warning">
-            <span class="h4"> <i class="fa-light"></i> Hiện chưa có lịch trình!</span>
+            <span class="h4"> <i class="fa-light"></i>Hiện chưa có lịch trình!</span>
         </div>
     </div>
     <div class="row">

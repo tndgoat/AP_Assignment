@@ -52,7 +52,15 @@ $revenue = $dataRevenue['count'];
         </div>
     </div>
 	<div class="row">
-        <div class="col-xl-3 col-md-6 col-sm-12">
+        <div class="col-xl-4 col-md-6 col-sm-12">
+            <div class="card bg-danger">
+                <div class="card-body">
+                <h5 class="card-title text-light" style="font-size: 60px;"><b><?=$countCustomer?></b></h5>
+                    <p class="card-text text-light" style="font-size: 30px;">Số tài xế</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6 col-sm-12">
             <div class="card bg-info">
                 <div class="card-body">
                     <h5 class="card-title text-light" style="font-size: 60px;"><b><?=$countOrder?></b></h5>
@@ -60,27 +68,11 @@ $revenue = $dataRevenue['count'];
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-md-6 col-sm-12">
+        <div class="col-xl-4 col-md-6 col-sm-12">
             <div class="card bg-success">
                 <div class="card-body">
                 <h5 class="card-title text-light" style="font-size: 60px;"><b><?=$countProduct?></b></h5>
                     <p class="card-text text-light" style="font-size: 30px;">Số lượng xe</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6 col-sm-12">
-            <div class="card bg-warning">
-                <div class="card-body">
-                <h5 class="card-title text-light" style="font-size: 60px;"><b><?=$revenue?></b></h5>
-                    <p class="card-text text-light" style="font-size: 30px;">Doanh thu (VND)</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6 col-sm-12">
-            <div class="card bg-danger">
-                <div class="card-body">
-                <h5 class="card-title text-light" style="font-size: 60px;"><b><?=$countCustomer?></b></h5>
-                    <p class="card-text text-light" style="font-size: 30px;">Số tài xế</p>
                 </div>
             </div>
         </div>

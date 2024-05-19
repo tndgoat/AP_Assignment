@@ -92,12 +92,12 @@ if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
     $cart .=    '<div class="container pt-5 pb-5">
                             <div class="row mb-2">
                                 <div class="alert alert-warning">
-                                    <span class="h4"> <i class="fa-light fa-face-smile"></i> Giỏ hàng trống! Vui lòng thêm sản phẩm</span>
+                                    <span class="h4"> <i class="fa-light fa-face-smile"></i> Hiện bạn chưa có lịch trình cho bất cứ chuyến đi nào!</span>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xl-3 col-md-3 col-sm-6 mx-auto">
-                                    <a href="' . $rootPath . '/product.php" class="btn btn-primary">Trở về trang sản phẩm</a>
+                                    <a href="' . $rootPath . '/product.php" class="btn btn-primary">Đăng kí lịch trình</a>
                                 </div>
                             </div>
                         </div>';

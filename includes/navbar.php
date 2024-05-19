@@ -17,21 +17,7 @@
         <li class="nav-item">
           <a class="nav-link" href="<?php echo $rootPath; ?>/contact.php">Liên hệ</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<?php echo $rootPath; ?>/posts.php">Tin tức</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<?php echo $rootPath; ?>/policy.php">Chính sách</a>
-        </li>
       </ul>
-      <form action="<?php echo $rootPath ?>/search.php" method="get" class="d-flex me-3" role="search">
-        <div class="input-group flex-nowrap search-top">
-          <input hidden=true name="sort" value="all">
-          <input class="form-control" type="search" name="key" placeholder="Search..." id="live-search" aria-label="Search" value="<?php if (!empty($_GET['key'])) echo $_GET['key']; ?>">
-          <button class="btn btn-primary round-circle" type="submit"><i class="fa-regular fa-magnifying-glass text-white"></i></button>
-          <div id="live-search__result"></div>
-        </div>
-      </form>
       <ul class="nav navbar-nav pull-right">
         <li class="nav-item me-2">
           <a href="<?php echo $rootPath ?>/cart.php" class="btn btn-light" id="headerCart">
