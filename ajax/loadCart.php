@@ -73,7 +73,6 @@ if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
                                     </table>
                                 </div>
                                 <div class="row">
-                                    <a href="' . $rootPath . '/customer/check_out.php" class="btn btn-primary"><strong>Đặt hàng</strong></a>
                                     <a href="' . $rootPath . '/product.php" class="btn btn-outline-warning mt-2">Tiếp tục mua hàng</a>
                                 </div>
                             </div>

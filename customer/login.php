@@ -57,10 +57,7 @@ if (isset($_POST['login_user'])) {
       while ($row = $ketqua->fetch_assoc()) {
         if ($row["email"] == $email && password_verify($password, $row["password"])) {
           $_SESSION["email_user"] = $email;
-          if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) 
-              header('location: check_out.php');
-            else
-              header('location: my_account.php');
+          header('location: my_account.php');
         } else {
           $is_validated = false;
           $tb = 'Sai email hoặc mật khẩu';
@@ -74,10 +71,7 @@ if (isset($_POST['login_user'])) {
     }
     if ($is_validated) {
       $_SESSION["email_user"] = $email;
-      if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) 
-        header('location: check_out.php');
-      else
-        header('location: my_account.php');
+      header('location: my_account.php');
     }
 }
 ?>
