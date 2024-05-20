@@ -144,7 +144,7 @@ if ($product->num_rows > 0) {
                         <?php
                             }
                         ?>
-                        <form action="regis_car.php" accept-charset="UTF-8" method="get">
+                        <!-- <form action="regis_car.php" accept-charset="UTF-8" method="get">
                             <div class="row pb-3 d-flex justify-content-end">
                                 <div class="col-xl-4 col-md-6 col-sm-12">
                                     <input type="hidden" name="action" value="add"> 
@@ -152,7 +152,15 @@ if ($product->num_rows > 0) {
                                     <button onclick="addCartItem(<?=$row['product_id']?>)" class="w-100 btn btn-warning btn-lg  <?php if ($row["status"] <= 0) echo 'disabled'?>">Đăng ký xe</button>
                                 </div>
                             </div>
-                        </form>
+                        </form> -->
+                        <div class="ps-3 pe-3 pt-3 pb-3">
+                            <button type="button" class="btn btn-primary <?php if (!isset($_SESSION['email_user']))
+                                        echo 'disabled' ?>"
+                                data-bs-toggle="modal" data-bs-target="#carRegis"><i class="fa-sharp fa-solid"></i> Đăng ký xe</button>
+                            <div class="mt-1">
+                                <i><small>(<i class="fa-regular fa-asterisk"></i>) Vui lòng đăng nhập</small></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -198,12 +206,6 @@ if ($product->num_rows > 0) {
                         <?php 
                             $userIdSelf = $row['user_id'];
                             $sqlUserOrder = "SELECT user_id FROM `ltncdb`.`order`, order_item WHERE user_id = '$userIdSelf' AND product_id = '$productId' AND order.order_id = order_item.order_id";
-                            $checkBuy = $conn->query($sqlUserOrder);
-                            if ($checkBuy->num_rows>0) {
-                                echo '<span class="text-success"><i class="fa-duotone fa-badge-check"></i> Đã sử dụng xe này</span>';
-                            } else {
-                                echo '<span class="text-warning"><i class="fa-duotone fa-badge-check"></i> Chưa sử dụng xe này</span>';
-                            }
                         ?>
                         <p class="mt-3 ms-2">
                             <span class="text-success"><?=$row['title']?></span>:
@@ -276,6 +278,40 @@ if ($product->num_rows > 0) {
         </div>
     </form>
   </div>
+</div>
+<div class="modal fade" id="carRegis" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form action="<?= $rootPath ?>/booking.php" method="post">
+            <input type="hidden" name="userId" value="<?= $userId ?>">
+            <input type="hidden" name="productId" value="<?= $productId ?>">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Đăng ký xe</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="duration" class="form-label">Thời lượng sử dụng (ngày)</label>
+                        <input type="text" class="form-control" id="duration" name="duration" placeholder="">
+                    </div>
+                        <label for="place" class="form-label">Nơi nhận xe</label>
+                        <select class="form-control" id="place" name="place">
+                            <option value="co-so-1">Cơ sở 1</option>
+                            <option value="co-so-2">Cơ sở 2</option>
+                            <option value="co-so-3">Cơ sở 3</option>
+                        </select>
+                    <div class="mb-3">
+                        <label for="purpose" class="form-label">Mục đích sử dụng xe</label>
+                        <textarea class="form-control"  id="purpose" name="purpose" style="height: 100px"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" name="register" value = "Gửi" class="btn btn-primary">Gửi</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 <?php
     $conn->close();
