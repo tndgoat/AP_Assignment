@@ -59,7 +59,7 @@ if (isset($_GET['id'])) {
                 <div>Trạng thái phê duyệt: 
                 <span class="
                     <?php 
-                        if ($ketQua['status'] == 'Đang xử lý')
+                        if ($ketQua['status'] == 'Đang chờ xét duyệt')
                             echo 'text-danger';
                         else 
                             echo 'text-success' 
@@ -105,15 +105,13 @@ if (isset($_GET['id'])) {
                     echo "Container";?></div>
                 <div>Loại nhiên liệu: <?= $cardetail['fuel_type'] ?></div>
                 <div>Trạng thái: <?php if ($cardetail['status'] == 0) {
-                    echo "Đang hoạt động";
-                } elseif ($cardetail['status'] == 1) {
                     echo "Đang bảo dưỡng";
+                } elseif ($cardetail['status'] == 1) {
+                    echo "Đang hoạt động";
                 } 
                 else {
                     echo "Ngưng hoạt động";
                 } ?></div>
-                <div>Hình ảnh </div>
-
             </div>
         </div>
     </div>

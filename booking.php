@@ -12,7 +12,7 @@ if (isset($_POST['register'])) {
     $productId = mysqli_real_escape_string($conn, $_POST['productId']);
 
     
-    $sqlInsert = "INSERT INTO `order` (user_id, purpose, using_duration, receive_place,status, expired_status) VALUES ('$userId','$purpose','$duration','$place','Đang xử lý','0')";
+    $sqlInsert = "INSERT INTO `order` (user_id, purpose, using_duration, receive_place,status, expired_status) VALUES ('$userId','$purpose','$duration','$place','Đang chờ xét duyệt','0')";
     $conn->query($sqlInsert);
     $res = $conn->query("SELECT * FROM `order` WHERE user_id='$userId'");
     $item = $res->fetch_assoc();

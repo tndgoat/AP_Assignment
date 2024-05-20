@@ -77,8 +77,9 @@ if (isset($_POST['update'])) {
                     <form action="<?=$_SERVER['PHP_SELF']?>?id=<?=$orderId?>" method="post">
                         <label for="status" >Trạng thái phê duyệt: </label>
                         <select name="status" class="form-select form-select-sm">
-                            <option value="Đang xử lý">Đang xử lý</option>
-                            <option value="Thành công">Thành công</option>
+                            <option value="Đang chờ xét duyệt">Đang chờ xét duyệt</option>
+                            <option value="Đang vận chuyển">Đang vận chuyển</option>
+                            <option value="Đã vận chuyển">Đã vận chuyển</option>
                         </select>
                         <label for="expired" >Trạng thái yêu cầu: </label>
                         <select name="expired" class="form-select form-select-sm">
